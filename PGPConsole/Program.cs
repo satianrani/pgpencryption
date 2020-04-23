@@ -26,7 +26,7 @@ namespace PGPConsole
             Console.WriteLine("Encrypt End");
 
             Console.WriteLine("Decrypt Start");
-            string cipherFilePath = @"G:\dotnet\PGPConsole\PGPConsole\MyTest.tmp";
+           // string cipherFilePath = @"G:\dotnet\PGPConsole\PGPConsole\MyTest.tmp";
             string reciverPrivateKey = @"G:\dotnet\PGPConsole\PGPConsole\reciver_private.txt";
             string senderPublicKey = @"G:\dotnet\PGPConsole\PGPConsole\sender_public.txt";
             string reciverSignaturePassword = "Reciver";

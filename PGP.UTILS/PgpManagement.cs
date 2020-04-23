@@ -16,8 +16,7 @@ namespace PGP.UTILS
             {
                 PgpEncryptionKeys objPgpEncryptionKeys = new PgpEncryptionKeys(reciverPublicKey, senderPrivateKey, senderSignaturePassword);
                 PgpEncrypt objPgpEncrypt = new PgpEncrypt(objPgpEncryptionKeys);
-                objPgpEncrypt.EncryptAndSign(str, originalText);
-                Console.WriteLine(str.ToArray().Length); 
+                objPgpEncrypt.EncryptAndSign(str, originalText); 
                 SaveFileStream(encryptFileoutPut, str);
                 str.Flush();
                 str.Close();
@@ -25,16 +24,13 @@ namespace PGP.UTILS
         }
 
         public static byte[] Encrypt(string originalText, string reciverPublicKey, string senderPrivateKey, string senderSignaturePassword)
-        {
-            // FileInfo fi = new FileInfo(fileOriginalPath);
-            // using (FileStream str = new FileStream(encryptFileoutPut, FileMode.Create))
+        { 
             byte[] data;
             using (MemoryStream str = new MemoryStream())
             {
                 PgpEncryptionKeys objPgpEncryptionKeys = new PgpEncryptionKeys(reciverPublicKey, senderPrivateKey, senderSignaturePassword);
                 PgpEncrypt objPgpEncrypt = new PgpEncrypt(objPgpEncryptionKeys);
-                objPgpEncrypt.EncryptAndSign(str, originalText);
-                Console.WriteLine(str.ToArray().Length);
+                objPgpEncrypt.EncryptAndSign(str, originalText); 
                 data = str.ToArray();
                 str.Flush();
                 str.Close();
