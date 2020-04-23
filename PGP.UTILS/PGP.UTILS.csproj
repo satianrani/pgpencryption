@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptoHelper.cs" />
+    <Compile Include="PgpGenerator.cs" />
     <Compile Include="PgpManagement.cs" />
     <Compile Include="PGPDecrypt.cs" />
     <Compile Include="PgpEncrypt.cs" />

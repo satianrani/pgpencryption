@@ -1,17 +1,18 @@
 ﻿using Org.BouncyCastle.Bcpg;
 using Org.BouncyCastle.Bcpg.OpenPgp;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Generators;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities.IO;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PGP.UTILS
 {
-    public  class CryptoHelper
+    public class CryptoHelper
     {
         public static PgpPublicKey ReadPublicKey(Stream inputStream)
         {
@@ -35,6 +36,7 @@ namespace PGP.UTILS
 
             throw new ArgumentException("Can't find encryption key in key ring.");
         }
+
         /**
     * Search a secret key ring collection for a secret key corresponding to
     * keyId if it exists.
@@ -44,6 +46,7 @@ namespace PGP.UTILS
     * @param pass passphrase to decrypt secret key with.
     * @return
     */
+
         private static PgpPrivateKey FindSecretKey(PgpSecretKeyRingBundle pgpSec, long keyId, char[] pass)
         {
             PgpSecretKey pgpSecKey = pgpSec.GetSecretKey(keyId);
@@ -62,6 +65,7 @@ namespace PGP.UTILS
         * @param passCode - the password
         * @return - decrypted data as byte array
         */
+
         public static byte[] Decrypt(byte[] inputData, Stream keyIn, string passCode)
         {
             byte[] error = Encoding.ASCII.GetBytes("ERROR");
@@ -129,11 +133,11 @@ namespace PGP.UTILS
                     if (!pbe.Verify())
                         Console.WriteLine("Message failed integrity check.", "PGP Error");
                     else
-                        Console.WriteLine("Message integrity check passed.", "PGP Error");  
+                        Console.WriteLine("Message integrity check passed.", "PGP Error");
                 }
                 else
                 {
-                    Console.WriteLine("No message integrity check.", "PGP Error"); 
+                    Console.WriteLine("No message integrity check.", "PGP Error");
                 }
 
                 return decoded.ToArray();
@@ -153,6 +157,7 @@ namespace PGP.UTILS
         * @param armor - protect the data streams
         * @return - encrypted byte array
         */
+
         public static byte[] Encrypt(byte[] inputData, PgpPublicKey passPhrase, bool withIntegrityCheck, bool armor)
         {
             byte[] processedData = Compress(inputData, PgpLiteralData.Console, CompressionAlgorithmTag.Uncompressed);
@@ -203,6 +208,7 @@ namespace PGP.UTILS
 
             return bOut.ToArray();
         }
-    
-}
+
+       
+    }
 }

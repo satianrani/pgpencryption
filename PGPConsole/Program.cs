@@ -7,6 +7,10 @@ namespace PGPConsole
     {
         private static void Main(string[] args)
         {
+            PGP.UTILS.PgpGenerator.CreateKeyFile("test@gmail.con", "thailand", @"G:\dotnet\PGPConsole\PGPConsole\test.pgp");
+             Console.ReadLine();
+        }
+        private  static void RuntimeArgumentHandle() {
             Console.WriteLine("Encrypt Start");
             string originalPath = @"G:\dotnet\PGPConsole\PGPConsole\originalData.txt";
 
@@ -26,17 +30,16 @@ namespace PGPConsole
             Console.WriteLine("Encrypt End");
 
             Console.WriteLine("Decrypt Start");
-           // string cipherFilePath = @"G:\dotnet\PGPConsole\PGPConsole\MyTest.tmp";
+            // string cipherFilePath = @"G:\dotnet\PGPConsole\PGPConsole\MyTest.tmp";
             string reciverPrivateKey = @"G:\dotnet\PGPConsole\PGPConsole\reciver_private.txt";
             string senderPublicKey = @"G:\dotnet\PGPConsole\PGPConsole\sender_public.txt";
             string reciverSignaturePassword = "Reciver";
-         //   string outputDecryptFile = @"G:\dotnet\PGPConsole\PGPConsole\output.txt";
+            //   string outputDecryptFile = @"G:\dotnet\PGPConsole\PGPConsole\output.txt";
 
-           // byte[] cipher = File.ReadAllBytes(encryptFileoutPut);
+            // byte[] cipher = File.ReadAllBytes(encryptFileoutPut);
             string decrypt = PGP.UTILS.PgpManagement.Decrypt(outputEncrypt, reciverPrivateKey, reciverSignaturePassword, senderPublicKey);
             Console.WriteLine(decrypt);
             Console.WriteLine("Decrypt End");
-            Console.ReadLine();
         }
     }
 }

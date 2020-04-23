@@ -57,8 +57,7 @@ namespace PGP.UTILS
         private Stream ChainEncryptedOut(Stream outputStream)
         {
             //1
-            PgpEncryptedDataGenerator encryptedDataGenerator;
-            encryptedDataGenerator =
+            PgpEncryptedDataGenerator encryptedDataGenerator =
                 new PgpEncryptedDataGenerator(SymmetricKeyAlgorithmTag.TripleDes,
                                               new SecureRandom());
             encryptedDataGenerator.AddMethod(m_encryptionKeys.PublicKey);
@@ -87,7 +86,7 @@ namespace PGP.UTILS
             const bool IsNested = false;
             PublicKeyAlgorithmTag tag = m_encryptionKeys.SecretKey.PublicKey.Algorithm;
             PgpSignatureGenerator pgpSignatureGenerator =
-                new PgpSignatureGenerator(tag, HashAlgorithmTag.Sha1);
+                new PgpSignatureGenerator(tag, HashAlgorithmTag.Sha512);
             pgpSignatureGenerator.InitSign(PgpSignature.BinaryDocument, m_encryptionKeys.PrivateKey);
             foreach (string userId in m_encryptionKeys.SecretKey.PublicKey.GetUserIds())
             {
